@@ -1,0 +1,11 @@
+.board {
+    height: 380px;
+    width: 380px;
+    /* background-color: #282c34; */
+    background-color: #fff;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 120px 120px 120px;
+    grid-gap: 10px;
+    padding: 10px;
+}

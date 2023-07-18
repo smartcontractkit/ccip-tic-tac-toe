@@ -1,0 +1,8 @@
+.header {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.header div span {
+    color: rgb(177, 238, 175);
+}
