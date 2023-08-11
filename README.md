@@ -189,7 +189,7 @@ After player 2 made the move, player 1 can make the move with x and y coordinate
 
 Player 1 makes a move with command below:
 ```shell
-npx hardhat ttt-move --x <x coordinate> --y <y coordinate> --player 2 --session-id <sessionId> --source-blockchain ethereumSepolia --sender <address of TicTacToe on Ethereum Sepolia> --destination-blockchain avalancheFuji --receiver <address of TicTacToe on Avalanche Fuji>
+npx hardhat ttt-move --x <x coordinate> --y <y coordinate> --player 1 --session-id <sessionId> --source-blockchain ethereumSepolia --sender <address of TicTacToe on Ethereum Sepolia> --destination-blockchain avalancheFuji --receiver <address of TicTacToe on Avalanche Fuji>
 ```
 
 ### 8. Repeat 6 and 7
