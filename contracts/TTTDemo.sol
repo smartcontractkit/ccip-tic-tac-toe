@@ -35,17 +35,7 @@ contract TTTDemo is CCIPReceiver, OwnerIsCreator {
     mapping(bytes32 => GameSession) public gameSessions;
     bytes32[] public sessionIds;
 
-    // there are 8 win combinations
-    mapping(bytes32 => bool) public wcs;
     uint8[9] initialCombination = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    bytes32 constant WC_0 = keccak256(abi.encodePacked([1, 1, 1, 0, 0, 0, 0, 0, 0]));
-    bytes32 constant WC_1 = keccak256(abi.encodePacked([1, 0, 0, 0, 1, 0, 0, 0, 1]));
-    bytes32 constant WC_2 = keccak256(abi.encodePacked([1, 0, 0, 1, 0, 0, 1, 0, 0]));
-    bytes32 constant WC_3 = keccak256(abi.encodePacked([0, 1, 0, 0, 1, 0, 0, 1, 0]));
-    bytes32 constant WC_4 = keccak256(abi.encodePacked([0, 0, 1, 0, 0, 1, 0, 0, 1]));
-    bytes32 constant WC_5 = keccak256(abi.encodePacked([0, 0, 1, 0, 1, 0, 1, 0, 0]));
-    bytes32 constant WC_6 = keccak256(abi.encodePacked([0, 0, 0, 1, 1, 1, 0, 0, 0]));
-    bytes32 constant WC_7 = keccak256(abi.encodePacked([0, 0, 0, 0, 0, 0, 1, 1, 1]));
 
     function getPlayer1Status(bytes32 _sessionId) external view returns (uint8[9] memory){
         return gameSessions[_sessionId].player1Status;
@@ -86,7 +76,6 @@ contract TTTDemo is CCIPReceiver, OwnerIsCreator {
     /// @notice Constructor initializes the contract with the router address.
     /// @param router The address of the router contract.
     constructor(address router) CCIPReceiver(router) {
-        updateWC();
     }
 
     function updateRouter(address routerAddr) external {
@@ -109,19 +98,12 @@ contract TTTDemo is CCIPReceiver, OwnerIsCreator {
         sendMessage(destinationChainSelector, receiver, gameSessions[uniqueId]);
     }
 
-    function updateWC() internal {
-        wcs[WC_0] = true;
-        wcs[WC_1] = true;
-        wcs[WC_2] = true;
-        wcs[WC_3] = true;
-        wcs[WC_4] = true;
-        wcs[WC_5] = true;
-        wcs[WC_6] = true;
-        wcs[WC_7] = true;
-    }
+    function checkWin(uint8[9] memory playerStatus) public pure returns(bool _return){
+        if(horizontalCheck(playerStatus) || verticalCheck(playerStatus) || diagonalCheck(playerStatus)) {
+            return true;
+        }
 
-    function checkWin(bytes32 combination) public view returns (bool) {
-        return wcs[combination];
+        return false;
     }
 
     /// @notice Sends data to receiver on the destination chain.
@@ -198,7 +180,7 @@ contract TTTDemo is CCIPReceiver, OwnerIsCreator {
                gameSessions[sessionId].player1Status[x * 3 + y] = 1;
                
                // 2. check if player1 wins or make the turn to the opponent, send the message
-               if(checkWin(keccak256(abi.encodePacked(gameSessions[sessionId].player1Status)))) {
+               if(checkWin(gameSessions[sessionId].player1Status)) {
                    gameSessions[sessionId].winner = gameSessions[sessionId].player_1;
                } else {
                    gameSessions[sessionId].turn = gameSessions[sessionId].player_2;
@@ -220,7 +202,7 @@ contract TTTDemo is CCIPReceiver, OwnerIsCreator {
                gameSessions[sessionId].player2Status[x * 3 + y] = 1; 
 
                // 2. check if player1 wins or make the turn to the oppenent, send the message
-               if(checkWin(keccak256(abi.encodePacked(gameSessions[sessionId].player2Status)))) {
+               if(checkWin(gameSessions[sessionId].player2Status)) {
                    gameSessions[sessionId].winner = gameSessions[sessionId].player_2;
                } else {
                    gameSessions[sessionId].turn = gameSessions[sessionId].player_1;
@@ -292,6 +274,51 @@ contract TTTDemo is CCIPReceiver, OwnerIsCreator {
             detail.sender,
             detail.message
         );
+    }
+
+
+    function horizontalCheck(uint8[9] memory playerStatus) private pure returns(bool horizontalValidation){
+        if(playerStatus[0] == 1 && playerStatus[1] == 1 && playerStatus[2] == 1) {
+            return true;
+        }
+
+        if(playerStatus[3] == 1 && playerStatus[4] == 1 && playerStatus[5] == 1) {
+            return true;
+        }
+
+        if(playerStatus[6] == 1 && playerStatus[7] == 1 && playerStatus[8] == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function verticalCheck(uint8[9] memory playerStatus) private pure returns(bool verticalValidation){
+        if(playerStatus[0] == 1 && playerStatus[3] == 1 && playerStatus[6] == 1) {
+            return true;
+        }
+
+        if(playerStatus[1] == 1 && playerStatus[4] == 1 && playerStatus[7] == 1) {
+            return true;
+        }
+
+        if(playerStatus[2] == 1 && playerStatus[5] == 1 && playerStatus[8] == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function diagonalCheck(uint8[9] memory playerStatus) private pure returns(bool diagonalValidation){
+        if(playerStatus[0] == 1 && playerStatus[4] == 1 && playerStatus[8] == 1) {
+            return true;
+        }
+
+        if(playerStatus[2] == 1 && playerStatus[4] == 1 && playerStatus[6] == 1) {
+            return true;
+        }
+
+        return false;
     }
 
     /// @notice Fallback function to allow the contract to receive Ether.
