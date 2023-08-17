@@ -131,7 +131,7 @@ npx hardhat run ./scripts/deployTicTacToe.ts --network avalancheFuji
 ```
 
 ### 2. Transfer native tokens to TicTacToe smart contract
-After the deployment of the contract, you must transfer native tokens to these 2 contracts respectively. If you deployed contracts on Fuji and Sepolia, please transfer 2 AVAX and 0.01 ETH to contracts on Fuji and Sepolia respectively.
+After the deployment of the contract, you must transfer native tokens to these 2 contracts respectively. If you deployed contracts on Fuji and Sepolia, please transfer 2 AVAX and 0.01 ETH to contracts on Fuji and Sepolia respectively. If you are trying with polygon mumbai, please transfer 2 MATIC to contract. 
 
 ### 3. Update router
 Please use commands below to update router address for `ccipSend`. For most of cases, the router addresses input here are same as router addresses of CCIP. 
