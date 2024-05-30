@@ -11,7 +11,7 @@ import { Spinner } from "../utils/spinner";
 task(`ttt-start`, `start a new tic tac toe game`)
     .addParam(`sourceBlockchain`, `The name of the source blockchain (for example ethereumSepolia)`)
     .addParam(`sender`, `The address of the TTTDemo.sol on the source blockchain`)
-    .addParam(`destinationBlockchain`, `The name of the destination blockchain (for example polygonMumbai)`)
+    .addParam(`destinationBlockchain`, `The name of the destination blockchain (for example polygonAmoy)`)
     .addParam(`receiver`, `The address of the receiver BasicMessageReceiver.sol on the destination blockchain`)
     .setAction(async (taskArguments: TaskArguments) => {
         const { sourceBlockchain, sender, destinationBlockchain, receiver } = taskArguments;

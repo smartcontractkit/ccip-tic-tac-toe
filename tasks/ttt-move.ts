@@ -15,7 +15,7 @@ task(`ttt-move`, `one player makes a move`)
     .addParam(`sessionId`, `id of the session`)
     .addParam(`sourceBlockchain`, `The name of the source blockchain (for example ethereumSepolia)`)
     .addParam(`sender`, `The address of the TTTDemo.sol on the source blockchain`)
-    .addParam(`destinationBlockchain`, `The name of the destination blockchain (for example polygonMumbai)`)
+    .addParam(`destinationBlockchain`, `The name of the destination blockchain (for example polygonAmoy)`)
     .addParam(`receiver`, `The address of the receiver BasicMessageReceiver.sol on the destination blockchain`)
     // .addParam(`payFeesIn`, `Choose between 'Native' and 'LINK'`)
     .setAction(async (taskArguments: TaskArguments) => {
