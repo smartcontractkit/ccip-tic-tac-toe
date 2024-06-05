@@ -82,10 +82,10 @@ npx env-enc set-pw
 
 ```shell
 ETHEREUM_SEPOLIA_RPC_URL=""
-OPTIMISM_GOERLI_RPC_URL=""
-ARBITRUM_TESTNET_RPC_URL=""
+OPTIMISM_SEPOLIA_RPC_URL=""
+ARBITRUM_SEPOLIA_RPC_URL=""
 AVALANCHE_FUJI_RPC_URL=""
-POLYGON_MUMBAI_RPC_URL=""
+POLYGON_AMOY_RPC_URL=""
 ```
 
 To set these variables, type the following command and follow the instructions in the terminal:
@@ -118,10 +118,10 @@ npx hardhat run ./scripts/deployTicTacToe.ts --network <blockchain>
 Where the list of supported chains consists of (case sensitive):
 
 - ethereumSepolia
-- optimismGoerli
-- arbitrumTestnet
+- optimismSepolia
+- arbitrumSepolia
 - avalancheFuji
-- polygonMumbai
+- polygonAmoy
 
 Although you can choose any two chains from the list, I highly recommend using Sepolia and Fuji because time consumed by CCIP to relay messages between these 2 chains are relatively shorter. If you want to deploy the contract at Sepolia and Fuji, the commands:
 
@@ -131,7 +131,7 @@ npx hardhat run ./scripts/deployTicTacToe.ts --network avalancheFuji
 ```
 
 ### 2. Transfer native tokens to TicTacToe smart contract
-After the deployment of the contract, you must transfer native tokens to these 2 contracts respectively. If you deployed contracts on Fuji and Sepolia, please transfer 2 AVAX and 0.01 ETH to contracts on Fuji and Sepolia respectively. If you are trying with polygon mumbai, please transfer 2 MATIC to contract. 
+After the deployment of the contract, you must transfer native tokens to these 2 contracts respectively. If you deployed contracts on Fuji and Sepolia, please transfer 2 AVAX and 0.01 ETH to contracts on Fuji and Sepolia respectively. If you are trying with polygon amoy, please transfer 2 MATIC to contract. 
 
 ### 3. Update router
 Please use commands below to update router address for `ccipSend`. For most of cases, the router addresses input here are same as router addresses of CCIP. 
@@ -143,10 +143,10 @@ Since you can have your own proxy to forward request to CCIP, update the address
 
 Router addresses are listed below:
 - Ethereum Sepolia: 0xd0daae2231e9cb96b94c8512223533293c3693bf
-- Polygon Mumbai: 0x70499c328e1e2a3c41108bd3730f6670a44595d1
-- Optimism Goerli: 0xeb52e9ae4a9fb37172978642d4c141ef53876f26
+- Polygon Amoy: 0x9C32fCB86BF0f4a1A8921a9Fe46de3198bb884B2
+- Optimism Sepolia: 0x114A20A10b43D4115e5aeef7345a1A71d2a60C57
 - Avalanche Fuji: 0x554472a2720e5e7d5d3c817529aba05eed5f82d8
-- Arbitrum Goerli: 0x88e492127709447a5abefdab8788a15b4567589e
+- Arbitrum Sepolia: 0x2a9C5afB0d0e4BAb2BCdaE109EC4b0c4Be15a165
 
 
 ### 4. Player 1 starts a game
