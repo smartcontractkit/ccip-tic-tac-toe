@@ -142,17 +142,24 @@ npx hardhat ttt-update-router --blockchain avalancheFuji --contract <address of 
 Since you can have your own proxy to forward request to CCIP, update the addresses above with your own proxy addresses if you want to use proxies. If you don't want to use proxies, keep the router addresses the same as CCIP. 
 
 Router addresses are listed below:
-- Ethereum Sepolia: 0xd0daae2231e9cb96b94c8512223533293c3693bf
+- Ethereum Sepolia: 0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59
 - Polygon Amoy: 0x9C32fCB86BF0f4a1A8921a9Fe46de3198bb884B2
 - Optimism Sepolia: 0x114A20A10b43D4115e5aeef7345a1A71d2a60C57
-- Avalanche Fuji: 0x554472a2720e5e7d5d3c817529aba05eed5f82d8
+- Avalanche Fuji: 0xF694E193200268f9a4868e4Aa017A0118C9a8177
 - Arbitrum Sepolia: 0x2a9C5afB0d0e4BAb2BCdaE109EC4b0c4Be15a165
 
 
 ### 4. Player 1 starts a game
 You can start a new game through a TicTacToe contract on any chain. The player who starts a game is player 1. Player 1 needs to send a transaction to create a session, allowing the other player on the other chain to join that session and make a move.
 
-Start a game with the command blow:
+---
+**NOTE**
+
+Before starting a new game, you need to send a small amount of native tokens to the source blockchain in order to cover fees. For example, if the sender is Ethereum Sepolia, you need to send to the `<contract address of TicTacToe>` some Sepolia ETH (SETH), if the sender is Avalanche Fuji, you need to send some Fuji AVAX.
+
+---
+
+Start a game with the command below:
 ```shell
 npx hardhat ttt-start --source-blockchain ethereumSepolia --sender <address of TicTacToe on Ethereum Sepolia> --destination-blockchain avalancheFuji --receiver <address of TicTacToe on Avalanche Fuji>
 ```
