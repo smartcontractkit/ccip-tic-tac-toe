@@ -152,7 +152,7 @@ Router addresses are listed below:
 ### 4. Player 1 starts a game
 You can start a new game through a TicTacToe contract on any chain. The player who starts a game is player 1. Player 1 needs to send a transaction to create a session, allowing the other player on the other chain to join that session and make a move.
 
-Start a game with the command blow:
+Start a game with the command below:
 ```shell
 npx hardhat ttt-start --source-blockchain ethereumSepolia --sender <address of TicTacToe on Ethereum Sepolia> --destination-blockchain avalancheFuji --receiver <address of TicTacToe on Avalanche Fuji>
 ```
